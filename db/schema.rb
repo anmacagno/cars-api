@@ -10,8 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_222015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "brands", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "lower((name)::text)", name: "index_brands_on_lower_name", unique: true
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.bigint "brand_id", null: false
+    t.string "name", null: false
+    t.integer "average_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "lower((name)::text), brand_id", name: "index_models_on_lower_name_brand_id", unique: true
+    t.index ["brand_id"], name: "index_models_on_brand_id"
+  end
+
+  add_foreign_key "models", "brands"
 end

@@ -5,6 +5,10 @@ require:
   - rubocop-rspec
 
 AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
   NewCops: enable
 
 Layout/LineLength:
