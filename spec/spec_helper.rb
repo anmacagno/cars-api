@@ -17,7 +17,10 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter %r{^/config/}
+  add_filter %r{^/spec/}
+end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
